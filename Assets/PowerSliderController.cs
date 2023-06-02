@@ -11,7 +11,6 @@ public class PowerSliderController : MonoBehaviour
     [SerializeField] Color activeColor;
     [SerializeField] Color inactiveColor;
     [SerializeField] Color disabledColor;
-    private Vector2 outOfBounce = new Vector2(0, 500);
 
     private bool powerActive = false;
     private bool powerUp = true;
@@ -27,14 +26,15 @@ public class PowerSliderController : MonoBehaviour
 
     private void PowerDisable()
     {
-        slider.transform.localPosition = outOfBounce;
         print("Deactivating Slider!");
         powerActive = false;
+        slider.transform.localScale = Vector3.zero;
+        
     }
 
     private void PowerActive()
     {
-        slider.transform.localPosition = Vector2.zero;
+        slider.transform.localScale = Vector3.one;
         powerValue = 0;
         UpdateSlider();
         background.color = activeColor;

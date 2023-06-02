@@ -8,7 +8,7 @@ public class LaunchController : MonoBehaviour
 {
     [SerializeField] private GameObject arrowHead;
     [SerializeField] private Slider slider;
-    private float powerMultiplier = 5f;
+    private float powerMultiplier = 10f;
     private bool launching = false;
     GameManager gameManager;
 

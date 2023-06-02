@@ -17,6 +17,12 @@ public class ArrowController : MonoBehaviour
         GameManager.AimTurn += AimActive;
         GameManager.PowerTurn += AimInactive;
         GameManager.LaunchTurn += AimDisable;
+        GameManager.PauseStage += AimFreeze;
+    }
+
+    private void AimFreeze()
+    {
+        AimDisable();
     }
 
     private void AimDisable()
@@ -24,7 +30,7 @@ public class ArrowController : MonoBehaviour
         _spriteRendererArrowHead.color = _disabledColor;
         _spriteRendererArrowBody.color = _disabledColor;
 
-        print("Aim ACtive!!");
+        print("Aim Inactive!!");
     }
 
     private void AimActive()
