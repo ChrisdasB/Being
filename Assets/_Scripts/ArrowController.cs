@@ -14,46 +14,33 @@ public class ArrowController : MonoBehaviour
 
     private void Awake()
     {
+        // Event subs
         GameManager.AimTurn += AimActive;
         GameManager.PowerTurn += AimInactive;
         GameManager.LaunchTurn += AimDisable;
-        GameManager.PauseStage += AimFreeze;
+        GameManager.PauseStage += AimDisable;
     }
 
-    private void AimFreeze()
-    {
-        AimDisable();
-    }
 
     private void AimDisable()
     {
+        // Set arrow to disabled color when game is paused or launch-event is invoked
         _spriteRendererArrowHead.color = _disabledColor;
         _spriteRendererArrowBody.color = _disabledColor;
-
-        print("Aim Inactive!!");
     }
 
     private void AimActive()
     {
-        // Change Color
+        // Set arrow to active color
         _spriteRendererArrowHead.color = _activeColor;
-        _spriteRendererArrowBody.color = _activeColor;
-
-        print("Aim ACtive!!");
+        _spriteRendererArrowBody.color = _activeColor;        
     }
 
     private void AimInactive()
     {
-        // Change Color
+        // Set arrow to inactive color (After log in, so the player can still see where he aimed at while managing the power)
         _spriteRendererArrowHead.color = _inactiveColor;
         _spriteRendererArrowBody.color = _inactiveColor;
-
-        print("Aim Inactive!!");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

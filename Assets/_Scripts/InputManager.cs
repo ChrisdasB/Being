@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] int minZoomOut = 2;
 
     public static event Action EscapeClicked;
+    public static event Action LeftMouseClicked;
+    public static event Action RightMouseClicked;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,25 +24,23 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // On Mouse-Left Click
+        // On Mouse-Left Click invoke event
         if(Input.GetKeyDown(KeyCode.Mouse0)) {
-        gameManager.MouseLeftClick();
-            print("mouse has been clicked!");
+            LeftMouseClicked.Invoke();
         }
-        // On Mouse-Right Click
+        // On Mouse-Right Click invoke event
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            gameManager.MouseRightClick();
-            print("mouse right has been clicked!");
+            RightMouseClicked.Invoke();
         }
-
-        // On Escape
+        // On Escape Click invoke event
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             EscapeClicked.Invoke();
         }
 
-        // Mousewheel up
+        // The Camera is for now controller in this script. Maybe a subject to change, if i need more functionality for the camera
+        // Mousewheel up: Zoom in camera by 1, if not on minZoom
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             if ((cmCamera.m_Lens.OrthographicSize + 1) > minZoomOut)
@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
                 cmCamera.m_Lens.OrthographicSize = cmCamera.m_Lens.OrthographicSize - 1;
             }
         }
-        // Mousewheel Down
+        // Mousewheel Down: Zoom out camera by 1, if not on maxZoom
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             if((cmCamera.m_Lens.OrthographicSize + 1) < maxZoomOut)

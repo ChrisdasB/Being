@@ -16,6 +16,7 @@ public class PerkController : MonoBehaviour
         LightPowerUpController.IncreaseLight += IncreaseLight;
     }
 
+    // If player hit a LightPowerUp: Calculate next value and set increaseLight to true
     void IncreaseLight()
     {
         nextLightValue = playerLight.pointLightOuterRadius * 1.5f;
@@ -24,6 +25,7 @@ public class PerkController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // If increaseLight is true: slowly increase the lighting radius, and check if the target-value has been reached
         if (increaseLight) 
         {
             currentLightValue += Time.deltaTime;

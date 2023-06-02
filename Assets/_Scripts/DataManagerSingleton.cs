@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DataManagerSingleton : MonoBehaviour
 {
+    // Create static Instance
     public static DataManagerSingleton Instance;
 
     public int triesCount;
@@ -12,6 +13,7 @@ public class DataManagerSingleton : MonoBehaviour
 
     private void Awake()
     {
+        // If Instance is not set, Instance is this, else destroy
         if (Instance == null)
             Instance = this;
         else

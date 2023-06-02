@@ -6,24 +6,25 @@ using UnityEngine.Rendering.Universal;
 
 public class PulsatingLight : MonoBehaviour
 {
-    float minLightIntesity = 0;
-    float maxLightIntesity = 0.15f;
-    float currentLightIntesity = 0;
-    float pulsatingSpeed = 0.3f;
-    private Light2D light;
-    bool lightUp = true;
+    private float minLightIntesity = 0;
+    private float maxLightIntesity = 0.15f;
+    private float currentLightIntesity = 0;
+    private float pulsatingSpeed = 0.3f;
+    private Light2D myLight;
+    private bool lightUp = true;
 
     // Start is called before the first frame update
 
     private void Awake()
     {
-        light = GetComponent<Light2D>();
+        myLight = GetComponent<Light2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(lightUp)
+        // If value is going up, check if it hit max, else increase by it time * multiplier, Update light-component value
+        if (lightUp)
         {
             if(currentLightIntesity > maxLightIntesity)
             {
@@ -32,6 +33,7 @@ public class PulsatingLight : MonoBehaviour
             currentLightIntesity += (Time.deltaTime * pulsatingSpeed);
             UpdateLight();
         }
+        // If value is going down, check if it hit min, else decrease it by time * multiplier, Update light-component value
         else
         {
             if(currentLightIntesity < minLightIntesity) 
@@ -45,6 +47,6 @@ public class PulsatingLight : MonoBehaviour
 
     private void UpdateLight()
     {
-        light.pointLightOuterRadius = currentLightIntesity;
+        myLight.pointLightOuterRadius = currentLightIntesity;
     }
 }

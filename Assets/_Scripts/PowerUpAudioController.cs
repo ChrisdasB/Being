@@ -4,16 +4,18 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+// Global AudioSource for PowerUps (exclusively)
 public class PowerUpAudioController : MonoBehaviour
 {
     private AudioSource audioPlayer;
 
     private void Awake()
     {
-        audioPlayer = GetComponent<AudioSource>();
         // Event Subs
         LightPowerUpController.IncreaseLight += PlayLightSound;
         TriesPowerUpController.IncreaseTries += PlayTriesSound;
+
+        audioPlayer = GetComponent<AudioSource>();        
     }
 
     private void PlayTriesSound()

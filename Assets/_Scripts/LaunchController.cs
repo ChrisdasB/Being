@@ -6,23 +6,25 @@ using UnityEngine.UI;
 
 public class LaunchController : MonoBehaviour
 {
+    // create event
+    public static event Action LaunchingDone;
+
     [SerializeField] private GameObject arrowHead;
     [SerializeField] private Slider slider;
     private float powerMultiplier = 10f;
     private bool launching = false;
-    GameManager gameManager;
-
     Rigidbody2D rb2d;
+
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>(); 
-        rb2d = GetComponent<Rigidbody2D>();
+        // Event Subs
         GameManager.LaunchTurn += Launch;
+        rb2d = GetComponent<Rigidbody2D>();        
     }
 
+    // Launch player into direction of the arrow, based on the power-slider value (times a multiplier)
     private void Launch()
     {
-        print("Launching!");
         Vector3 launchDirection = (arrowHead.transform.position - transform.position) * (slider.value * powerMultiplier);
         rb2d.AddForce(launchDirection,ForceMode2D.Impulse);
         launching = true;
@@ -30,11 +32,12 @@ public class LaunchController : MonoBehaviour
 
     private void Update()
     {
+        // If player is currently in movement, check if player is (nearly) standing still and invoke event
         if (launching) 
         {
             if (rb2d.velocity.magnitude < 0.1f)
             {
-                gameManager.LaunchingDone();
+                LaunchingDone.Invoke();
                 rb2d.velocity = Vector3.zero;
                 launching = false;
             }

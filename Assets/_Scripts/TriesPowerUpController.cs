@@ -1,18 +1,19 @@
-using System;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightPowerUpController : MonoBehaviour
+public class TriesPowerUpController : MonoBehaviour
 {
-    public static event Action IncreaseLight;
-    // Start is called before the first frame update
-    
+    // Create Event
+    public static event Action IncreaseTries;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // On Player trigger: invoke event, destroy this GameObject
         if (collision.gameObject.tag == "Player")
         {
-            IncreaseLight.Invoke();
+            IncreaseTries.Invoke();
             Destroy(gameObject);
         }
     }
