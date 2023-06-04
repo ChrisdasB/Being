@@ -25,6 +25,9 @@ public enum Turn
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameStage startingStage;
+    [SerializeField] Turn startingTurn;
+
     private GameStage _gameStage;
     private Turn _turn;
 
@@ -34,6 +37,8 @@ public class GameManager : MonoBehaviour
     public static event Action PauseStage;
     public static event Action WinStage;
     public static event Action PlayStage;
+    public static event Action StartStage;
+    public static event Action TutorialStage;
 
     // Play Stages - Only apply when GameStage is Play
     public static event Action AimTurn;
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // Event Subs
+        TutorialManager.TutorialFinished += TutorialFinished;
 
         // GameState Play events
         DangerSurfaceController.PlayerDied += PlayerDied;
@@ -60,11 +66,17 @@ public class GameManager : MonoBehaviour
         InputManager.RightMouseClicked += MouseRightClick;
     }
 
+    private void TutorialFinished()
+    {
+        ChangeGameState(GameStage.Play);
+        UpdateTries.Invoke();
+    }
+
     void Start()
     {
         // For Development: Start into Play-State and Invoke Aim-State
-        ChangeGameState(GameStage.Play);
-        ChangeTurn(Turn.Aim);
+        ChangeGameState(GameStage.Tutorial);
+        ChangeTurn(startingTurn);
     }
 
     // INPUT EVENTS //
@@ -107,7 +119,7 @@ public class GameManager : MonoBehaviour
     private void IncreaseTries()
     {
         DataManagerSingleton.Instance.triesCount += 3;
-        UpdateTries.Invoke();
+        //UpdateTries.Invoke();
     }
         
 
@@ -171,6 +183,16 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             PauseStage.Invoke();
+        }
+        else if (_gameStage == GameStage.Start)
+        {
+            Time.timeScale = 0;
+            StartStage.Invoke();
+        }
+        else if(_gameStage == GameStage.Tutorial)
+        {
+            Time.timeScale = 1;
+            TutorialStage.Invoke();
         }
     }
 

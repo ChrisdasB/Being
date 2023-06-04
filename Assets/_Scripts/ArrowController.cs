@@ -19,6 +19,7 @@ public class ArrowController : MonoBehaviour
         GameManager.PowerTurn += AimInactive;
         GameManager.LaunchTurn += AimDisable;
         GameManager.PauseStage += AimDisable;
+        GameManager.TutorialStage += AimDisable;
     }
 
 

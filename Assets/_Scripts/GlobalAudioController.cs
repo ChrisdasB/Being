@@ -9,11 +9,18 @@ public class GlobalAudioController : MonoBehaviour
     
     private void Awake()
     {
+
         audioSource = GetComponent<AudioSource>();
+        AudioManager.AudioValuesSet += StartPlaying;
 
         // Event subs
         GameManager.PlayStage += AudioFull;
         GameManager.PauseStage += AudioLowered;
+    }
+
+    private void StartPlaying()
+    {
+        audioSource.Play();
     }
 
     // Lower audio-volume in pause menu

@@ -7,6 +7,7 @@ using System;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] TMP_Text triesCount;
+    [SerializeField] GameObject triesCountContainer;
     [SerializeField] GameObject gameOverContainer;
     [SerializeField] GameObject winContainer;
     [SerializeField] GameObject pauseContainer;
@@ -57,6 +58,13 @@ public class UIManager : MonoBehaviour
     // Update TriesText by value saved in the DataManager
     void UpdateTries()
     {
-        triesCount.text = DataManagerSingleton.Instance.triesCount.ToString();
+        if(triesCount != null) 
+        {
+            triesCount.text = DataManagerSingleton.Instance.triesCount.ToString();
+        }
+        if(!triesCount.enabled)
+        {
+            triesCountContainer.SetActive(true);
+        }
     }
 }

@@ -8,8 +8,9 @@ public class DataManagerSingleton : MonoBehaviour
 {
     // Create Load Event
     public static event Action DataLoaded;
+    public static event Action NewPlayerSaved;
     // Create Save Event
-    public static event Action SaveData;
+    // public static event Action SaveData;
 
     // Create static Instance
     public static DataManagerSingleton Instance;
@@ -44,15 +45,32 @@ public class DataManagerSingleton : MonoBehaviour
 
         // Load the data from file
         savedData = SaveManager.LoadData();
-        DataLoaded.Invoke();
+        if (DataLoaded != null) { DataLoaded.Invoke(); }
         print(savedData.playerName);
     }
 
     private void HandleNewPlayer()
     {
-        SaveManager.SaveData(new SaveData(newPlayerName));
+        SaveData dataToSave = new SaveData(newPlayerName);
+        // Take the currently set audio settings into new player savegame
+        dataToSave.totalAudioValue = savedData.totalAudioValue;
+        dataToSave.musicAudioValue = savedData.musicAudioValue;
+        dataToSave.sfxAudioValue = savedData.sfxAudioValue;
+
+        SaveManager.SaveData(dataToSave);
         savedData = SaveManager.LoadData();
         DataLoaded.Invoke();
         print("New Player: " + savedData.playerName);
+        NewPlayerSaved.Invoke();
+    }
+
+    public void SaveAudioData(float masterAudio, float musicAudio, float sfxAudio)
+    {
+        savedData.totalAudioValue = masterAudio;
+        savedData.musicAudioValue = musicAudio;
+        savedData.sfxAudioValue = sfxAudio;
+        
+        SaveManager.SaveData(savedData);
+        print("Audio has been saved!");
     }
 }
