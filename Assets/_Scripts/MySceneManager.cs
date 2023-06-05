@@ -20,10 +20,10 @@ public class MySceneManager : MonoBehaviour
     {
         // Event subs
         SceneTransitionManager.SceneClosed += LoadLevel;
-        DataManagerSingleton.LevelFinishedAndSaved += LoadLevel;
 
         // Set first scene to MainMenu
-        currentScene = MainMenuScene;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+        print("Current Scene index is:" + SceneManager.GetActiveScene().buildIndex);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -38,10 +38,13 @@ public class MySceneManager : MonoBehaviour
         {
             SceneIsLoaded.Invoke();
         }
+        print("SceneLoaded");
     }
 
     private void LoadLevel()
     {
+        print("Loadeing Level!");
+        print("Unlocked Levels: " + DataManagerSingleton.savedData.unlockedLevels);
         // Load Tutorial
         if(DataManagerSingleton.savedData.unlockedLevels == 0)
         {

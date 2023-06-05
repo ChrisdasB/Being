@@ -78,6 +78,8 @@ public class PlayerContactController : MonoBehaviour
     public void DestroyBarrier()
     {        
         dangerBarrier.SetActive(true);
+        DangerSurfaceController controler = dangerBarrier.GetComponent<DangerSurfaceController>();
+        controler.SetSize(transform.localScale.y, transform.localPosition);
         this.gameObject.SetActive(false);
     }
 

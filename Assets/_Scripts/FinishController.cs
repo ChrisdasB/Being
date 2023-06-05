@@ -7,11 +7,13 @@ public class FinishController : MonoBehaviour
 {
     // Create event
     public static event Action TargetHit;
+    private EdgeCollider2D myCollider;
 
     private SpriteRenderer spriteRenderer;
 
     void Awake()
-    {        
+    {
+        myCollider = GetComponent<EdgeCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -20,8 +22,10 @@ public class FinishController : MonoBehaviour
         // On colission with player, turn color to gray and invoke event
         if(collision.gameObject.tag == "Player")
         {
+            print("Target hit!");
             spriteRenderer.color = Color.gray;
             TargetHit.Invoke();
+            myCollider.enabled = false;
         }
     }
 

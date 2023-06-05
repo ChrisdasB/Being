@@ -27,9 +27,12 @@ public class DataManagerSingleton : MonoBehaviour
 
     private void Awake()
     {
+        
+
         // Event subs
         NewPlayerNameController.NewPlayer += HandleNewPlayer;
         GameManager.WinStage += SaveProgression;
+        ContinueButton.OnContinue += ContinueGame;
 
         // If Instance is not set, Instance is this, else destroy
         if (Instance == null)
@@ -47,15 +50,16 @@ public class DataManagerSingleton : MonoBehaviour
 
         // Load the data from file
         savedData = SaveManager.LoadData();
+        Debug.LogError("UnlockedLevels: " + savedData.unlockedLevels);
         if (DataLoaded != null) { DataLoaded.Invoke(); }
         print(savedData.playerName);
     }
 
     private void SaveProgression()
     {
-        savedData.unlockedLevels++;
+        savedData.unlockedLevels = MySceneManager.currentScene;
         SaveManager.SaveData(savedData);
-        LevelFinishedAndSaved.Invoke();
+        CloseScene.Invoke();
     }
 
     private void HandleNewPlayer()
@@ -70,6 +74,11 @@ public class DataManagerSingleton : MonoBehaviour
         savedData = SaveManager.LoadData();
         DataLoaded.Invoke();
         print("New Player: " + savedData.playerName);
+        CloseScene.Invoke();
+    }
+
+    private void ContinueGame()
+    {
         CloseScene.Invoke();
     }
 
