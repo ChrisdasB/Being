@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         // Event Subs
         TutorialManager.TutorialFinished += TutorialFinished;
+        SceneTransitionManager.SceneOpened += StartLevel;
 
         // GameState Play events
         DangerSurfaceController.PlayerDied += PlayerDied;
@@ -66,18 +67,18 @@ public class GameManager : MonoBehaviour
         InputManager.RightMouseClicked += MouseRightClick;
     }
 
+    private void StartLevel()
+    {
+        ChangeGameState(startingStage);
+        ChangeTurn(startingTurn);
+    }
+
     private void TutorialFinished()
     {
         ChangeGameState(GameStage.Play);
         UpdateTries.Invoke();
     }
-
-    void Start()
-    {
-        // For Development: Start into Play-State and Invoke Aim-State
-        ChangeGameState(GameStage.Tutorial);
-        ChangeTurn(startingTurn);
-    }
+   
 
     // INPUT EVENTS //
     // Handle click on escape depending on the GameStage (Pause Menu)

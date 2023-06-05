@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8651874093196953262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 463921624558704615}
+  - component: {fileID: 1353763693827558960}
+  - component: {fileID: 7428615641871868842}
+  - component: {fileID: 1664092528609378727}
+  - component: {fileID: 7143701245059410835}
+  - component: {fileID: 5184633649421052232}
+  - component: {fileID: 4891582959620799036}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &463921624558704615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.54600155, y: 2.1110547, z: -0.035952955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1353763693827558960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0c6b9c94517c2468e9755bbbf5791b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingStage: 0
+  startingTurn: 0
+--- !u!114 &7428615641871868842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8106ed50d721454fa677cc8d287a903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cmCamera: {fileID: 0}
+  maxZoomOut: 13
+  minZoomOut: 2
+--- !u!114 &1664092528609378727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5db207a2804e304ea06ae932cef7a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triesCount: {fileID: 0}
+  triesCountContainer: {fileID: 0}
+  gameOverContainer: {fileID: 0}
+  winContainer: {fileID: 0}
+  pauseContainer: {fileID: 0}
+--- !u!114 &7143701245059410835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ecd7eafcff8cd4f9babfc6c6c080ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLight: {fileID: 0}
+  triesContainer: {fileID: 0}
+  exampleBarrier: {fileID: 0}
+  exampleBarrierController: {fileID: 0}
+  exampleLightPowerUp: {fileID: 0}
+  exampleTriesPowerUp: {fileID: 0}
+  exampleTarget: {fileID: 0}
+  fullLevelContainer: {fileID: 0}
+  tutorialTxt:
+  - In the beginning there was nothing!
+  - Oh... Ok, there was you!
+  - What and who you are is not important right now!
+  - 'The only thing you should know:'
+  - I am here to help you!
+  - First, let there be light!
+  - Or at least, more light ...
+  - Much better...
+  - Do you see that green line?
+  - You can bounce of it...
+  - 'But be carefull: After the third time, it will break ...'
+  - ... and become dangerous!
+  - Do you see the lights?
+  - The white one increases your light further.
+  - The blue one grands you more tries.
+  - The purple light marks your target ...
+  - If you reach it, you porceed.
+  - Good Luck!
+  playerLightMaxBrigtness: 1
+  playerLightMaxBrigtness2: 2.5
+  playerLightMultiplier: 0
+  audioSource: {fileID: 0}
+  txtSound: {fileID: 8300000, guid: 0606436af84fd604bbf15f49e433dfe0, type: 3}
+  tutorialText: {fileID: 0}
+--- !u!114 &5184633649421052232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49d8eb8d55d86844b88ba0e8bc35115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLight: {fileID: 0}
+  triesContainer: {fileID: 0}
+  playerLightMaxBrigtness: 2.5
+  playerLightMultiplier: 0.2
+--- !u!114 &4891582959620799036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8651874093196953262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083b23d7398e40a4fa48adbb056ce1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triesCount: 3
+  lightPowerUpAudio: {fileID: 8300000, guid: ea235950a92f7e647bcf77fcc8c53ca2, type: 3}
+  triesPowerUpAudio: {fileID: 8300000, guid: 80e6b19f7043e9841ab2ebd37be22411, type: 3}

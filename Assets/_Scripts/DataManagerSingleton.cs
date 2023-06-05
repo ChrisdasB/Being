@@ -8,7 +8,8 @@ public class DataManagerSingleton : MonoBehaviour
 {
     // Create Load Event
     public static event Action DataLoaded;
-    public static event Action NewPlayerSaved;
+    public static event Action CloseScene;
+    public static event Action LevelFinishedAndSaved;
     // Create Save Event
     // public static event Action SaveData;
 
@@ -28,6 +29,7 @@ public class DataManagerSingleton : MonoBehaviour
     {
         // Event subs
         NewPlayerNameController.NewPlayer += HandleNewPlayer;
+        GameManager.WinStage += SaveProgression;
 
         // If Instance is not set, Instance is this, else destroy
         if (Instance == null)
@@ -49,6 +51,13 @@ public class DataManagerSingleton : MonoBehaviour
         print(savedData.playerName);
     }
 
+    private void SaveProgression()
+    {
+        savedData.unlockedLevels++;
+        SaveManager.SaveData(savedData);
+        LevelFinishedAndSaved.Invoke();
+    }
+
     private void HandleNewPlayer()
     {
         SaveData dataToSave = new SaveData(newPlayerName);
@@ -61,7 +70,7 @@ public class DataManagerSingleton : MonoBehaviour
         savedData = SaveManager.LoadData();
         DataLoaded.Invoke();
         print("New Player: " + savedData.playerName);
-        NewPlayerSaved.Invoke();
+        CloseScene.Invoke();
     }
 
     public void SaveAudioData(float masterAudio, float musicAudio, float sfxAudio)

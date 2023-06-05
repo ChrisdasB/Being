@@ -23,8 +23,13 @@ public class PowerSliderController : MonoBehaviour
         GameManager.AimTurn += PowerDisable;
         GameManager.LaunchTurn += PowerDisable;
         GameManager.TutorialStage += PowerDisable;
-
+        
         slider = GetComponent<Slider>();        
+    }
+
+    private void ResetSliderPosition()
+    {
+        throw new NotImplementedException();
     }
 
     void FixedUpdate()

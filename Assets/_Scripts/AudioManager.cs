@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
     string musicParamString = "MusicVolume";
     string sfxParamString = "SFXVolume";
 
+    bool blendOutAudio = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,6 +33,7 @@ public class AudioManager : MonoBehaviour
 
         saveAudioBtn.onClick.AddListener(SaveAudioSettings);
         DataManagerSingleton.DataLoaded += SetInitialAudio;
+        DataManagerSingleton.CloseScene += ClosingScene;
     }
 
     private void SetInitialAudio()
@@ -76,9 +79,22 @@ public class AudioManager : MonoBehaviour
         masterAudioMixer.SetFloat(sfxParamString, newVolume);        
     }
 
-    // Update is called once per frame
-    void Update()
+    void ClosingScene()
     {
-        
+        blendOutAudio = true;
     }
+
+    private void Update()
+    {
+        if(blendOutAudio) 
+        {
+            HandleMusicAudioChanged(musicAudioSlider.value - 0.1f);
+
+            if(musicAudioSlider.value <= musicAudioSlider.minValue)
+            {
+                blendOutAudio = false;
+            }
+        }
+    }
+
 }

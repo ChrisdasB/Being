@@ -57,7 +57,7 @@ public class PlayerContactController : MonoBehaviour
             if (colorIndex >= colors.Count)
             {
                 // If there are no colors left (Player hits this for the third time), active danger-barrier and destroy this GameObject
-                
+                DestroyBarrier();
             }
             else
             {

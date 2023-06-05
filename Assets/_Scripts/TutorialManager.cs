@@ -128,7 +128,12 @@ public class TutorialManager : MonoBehaviour
         if (functionIndex == 23) { ShowTutorialTxt(indexInList); }
         if (functionIndex == 24) { ActivateLevel(); }
         if (functionIndex == 25) { IncreaseLight2(); }
-        if (functionIndex == 26) { TutorialFinished.Invoke(); }
+        if (functionIndex == 26) { TutorialFinished.Invoke(); EmptyOutTxt(); }
+    }
+
+    private void EmptyOutTxt()
+    {
+        tutorialText.text = string.Empty;
     }
 
     void WaitSecondsAndCallNextVoid(float seconds)
