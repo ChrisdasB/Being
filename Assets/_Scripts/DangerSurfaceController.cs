@@ -11,12 +11,15 @@ public class DangerSurfaceController : MonoBehaviour
     public static event Action PlayerDied;
 
     [SerializeField] AudioSource audioPlayer;
-    [SerializeField] AudioClip brokenSound;    
+    [SerializeField] AudioClip brokenSound;
+
+    BoxCollider2D collider2D;
 
     private void OnEnable()
     {
         // Play breaking sound, after GameObject was enabled
         audioPlayer.PlayOneShot(brokenSound);
+        collider2D = GetComponent<BoxCollider2D>();
     }
 
     public void SetSize(float sizeY, Vector3 pos)
@@ -32,6 +35,7 @@ public class DangerSurfaceController : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             PlayerDied.Invoke();
+            collider2D.enabled = false;
         }
     }
 }

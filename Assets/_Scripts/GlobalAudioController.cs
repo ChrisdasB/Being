@@ -20,6 +20,7 @@ public class GlobalAudioController : MonoBehaviour
 
     }
 
+    
     private void OnDestroy()
     {
         AudioManager.AudioValuesSet -= StartPlaying;

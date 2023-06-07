@@ -13,8 +13,14 @@ public class FinishController : MonoBehaviour
 
     void Awake()
     {
+        InputManager.DEBUGCLICKED += DEBUGSKIPLVL;
         myCollider = GetComponent<EdgeCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.DEBUGCLICKED -= DEBUGSKIPLVL;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,11 +28,20 @@ public class FinishController : MonoBehaviour
         // On colission with player, turn color to gray and invoke event
         if(collision.gameObject.tag == "Player")
         {
+            myCollider.enabled = false;
             print("Target hit!");
             spriteRenderer.color = Color.gray;
             TargetHit.Invoke();
-            myCollider.enabled = false;
         }
+    }
+
+    void DEBUGSKIPLVL()
+    {
+        myCollider.enabled = false;
+        print("Target hit!");
+        spriteRenderer.color = Color.gray;
+        TargetHit.Invoke();
+        myCollider.enabled = false;
     }
 
 }

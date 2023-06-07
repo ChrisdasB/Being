@@ -27,6 +27,14 @@ public class PowerSliderController : MonoBehaviour
         slider = GetComponent<Slider>();        
     }
 
+    private void OnDestroy()
+    {
+        GameManager.PowerTurn -= PowerActive;
+        GameManager.AimTurn -= PowerDisable;
+        GameManager.LaunchTurn -= PowerDisable;
+        GameManager.TutorialStage -= PowerDisable;
+    }
+
     private void ResetSliderPosition()
     {
         throw new NotImplementedException();
@@ -64,13 +72,13 @@ public class PowerSliderController : MonoBehaviour
     private void PowerDisable()
     {        
         powerActive = false;
-        slider.transform.localScale = Vector3.zero;        
+        transform.localScale = Vector3.zero;        
     }
 
     // Sets PowerActive to true, resets size of the slider to 1, Initiates power value to 0, Update the Slider (visually), changes color of slider
     private void PowerActive()
     {
-        slider.transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one;
         powerValue = 0;
         UpdateSlider();
         background.color = activeColor;

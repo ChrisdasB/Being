@@ -16,6 +16,11 @@ public class PerkController : MonoBehaviour
         LightPowerUpController.IncreaseLight += IncreaseLight;
     }
 
+    private void OnDestroy()
+    {
+        LightPowerUpController.IncreaseLight -= IncreaseLight;
+    }
+
     // If player hit a LightPowerUp: Calculate next value and set increaseLight to true
     void IncreaseLight()
     {

@@ -20,6 +20,11 @@ public class StartManager : MonoBehaviour
         GameManager.StartStage += HandleStartAnim;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.StartStage -= HandleStartAnim;
+    }
+
     private void HandleStartAnim()
     {
         increaseLight = true;

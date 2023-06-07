@@ -18,6 +18,12 @@ public class PowerUpAudioController : MonoBehaviour
         audioPlayer = GetComponent<AudioSource>();        
     }
 
+    private void OnDestroy()
+    {
+        LightPowerUpController.IncreaseLight -= PlayLightSound;
+        TriesPowerUpController.IncreaseTries -= PlayTriesSound;
+    }
+
     private void PlayTriesSound()
     {
         audioPlayer.PlayOneShot(DataManagerSingleton.Instance.triesPowerUpAudio);

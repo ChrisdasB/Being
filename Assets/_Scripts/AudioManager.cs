@@ -38,7 +38,14 @@ public class AudioManager : MonoBehaviour
         MySceneManager.SceneIsLoaded += OpeningScene;
     }
 
-   
+    private void OnDestroy()
+    {
+        DataManagerSingleton.DataLoaded -= SetInitialAudio;
+        DataManagerSingleton.CloseScene -= ClosingScene;
+        MySceneManager.SceneIsLoaded -= OpeningScene;
+    }
+
+
 
     private void SetInitialAudio()
     {
@@ -55,7 +62,11 @@ public class AudioManager : MonoBehaviour
         HandleMasterAudioChanged(DataManagerSingleton.savedData.totalAudioValue);
         HandleMusicAudioChanged(DataManagerSingleton.savedData.musicAudioValue);
         HandleSFXAudioChanged(DataManagerSingleton.savedData.sfxAudioValue);
-        AudioValuesSet.Invoke();
+        if(MySceneManager.currentScene != 1)
+        {
+            AudioValuesSet.Invoke();
+        }
+        
     }
 
     private void SaveAudioSettings()

@@ -51,8 +51,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Event Subs
-        TutorialManager.TutorialFinished += TutorialFinished;
         SceneTransitionManager.SceneOpened += StartLevel;
 
         // GameState Play events
@@ -65,20 +63,33 @@ public class GameManager : MonoBehaviour
         InputManager.EscapeClicked += EscapeClicked;
         InputManager.LeftMouseClicked += MouseLeftClick;
         InputManager.RightMouseClicked += MouseRightClick;
+
+        
+    }
+
+    private void OnDestroy()
+    {
+        // Event Subs
+        SceneTransitionManager.SceneOpened -= StartLevel;
+
+        // GameState Play events
+        DangerSurfaceController.PlayerDied -= PlayerDied;
+        FinishController.TargetHit -= TargetHit;
+        TriesPowerUpController.IncreaseTries -= IncreaseTries;
+        LaunchController.LaunchingDone -= LaunchingDone;
+
+        // Input Events
+        InputManager.EscapeClicked -= EscapeClicked;
+        InputManager.LeftMouseClicked -= MouseLeftClick;
+        InputManager.RightMouseClicked -= MouseRightClick;
     }
 
     private void StartLevel()
     {
+        print("Starting the level!");
         ChangeGameState(startingStage);
         ChangeTurn(startingTurn);
     }
-
-    private void TutorialFinished()
-    {
-        ChangeGameState(GameStage.Play);
-        UpdateTries.Invoke();
-    }
-   
 
     // INPUT EVENTS //
     // Handle click on escape depending on the GameStage (Pause Menu)
@@ -119,15 +130,15 @@ public class GameManager : MonoBehaviour
     // If player hits a Tries-PowerUp, increase triesCount by 3 (for now), Invoke event
     private void IncreaseTries()
     {
-        DataManagerSingleton.Instance.triesCount += 3;
-        //UpdateTries.Invoke();
+        DataManagerSingleton.triesCount += 3;
+        UpdateTries.Invoke();
     }
         
 
     // Event fired after launching and player comes to a stop: Check for tries-counter and change Game-Stage depended on that
     public void LaunchingDone()
     {
-        if(DataManagerSingleton.Instance.triesCount <= 0)
+        if(DataManagerSingleton.triesCount <= 0)
         {
             ChangeGameState(GameStage.End);
         }
@@ -177,6 +188,7 @@ public class GameManager : MonoBehaviour
         // GameStage Win: Invoke event
         else if (_gameStage == GameStage.Win)
         {
+            Time.timeScale = 1f;
             WinStage.Invoke();
         }
         // GameStage End: Set Timt to 0, invoke event
@@ -214,7 +226,7 @@ public class GameManager : MonoBehaviour
             }
             else if( _turn == Turn.Launch)
             {
-                DataManagerSingleton.Instance.triesCount--;
+                DataManagerSingleton.triesCount--;
                 LaunchTurn.Invoke();
             }            
         }

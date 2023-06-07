@@ -14,22 +14,35 @@ public class MySceneManager : MonoBehaviour
 
     public static event Action SceneIsLoaded;
 
-
+    bool reload = false;
     public static int currentScene;
     private void Awake()
     {
         // Event subs
         SceneTransitionManager.SceneClosed += LoadLevel;
+        GameManager.EndStage += SetReloadFlag;
 
         // Set first scene to MainMenu
         currentScene = SceneManager.GetActiveScene().buildIndex;
         print("Current Scene index is:" + SceneManager.GetActiveScene().buildIndex);
-        DontDestroyOnLoad(gameObject);
+    }
+
+   
+
+    private void OnDestroy()
+    {
+        SceneTransitionManager.SceneClosed -= LoadLevel;
     }
 
     private void OnEnable()
     {        
           SceneManager.sceneLoaded += SceneLoaded;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void SetReloadFlag()
+    {
+        reload = true;
     }
 
     private void SceneLoaded(Scene sceneObj, LoadSceneMode arg1)
@@ -42,43 +55,25 @@ public class MySceneManager : MonoBehaviour
     }
 
     private void LoadLevel()
-    {
-        print("Loadeing Level!");
+    {        
+        print("Loading Level!");
         print("Unlocked Levels: " + DataManagerSingleton.savedData.unlockedLevels);
+        if(reload) 
+        { DataManagerSingleton.savedData.unlockedLevels = (SceneManager.GetActiveScene().buildIndex); reload = false; }
+        print("Reloading with inden from saved data: " + DataManagerSingleton.savedData.unlockedLevels);
         // Load Tutorial
-        if(DataManagerSingleton.savedData.unlockedLevels == 0)
+        if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
         {
-            currentScene = tutorialScene;
-            SceneManager.LoadScene(currentScene);
+            SceneManager.LoadScene(DataManagerSingleton.savedData.unlockedLevels + 1);
         }
-        // Load Tutorial
-        if (DataManagerSingleton.savedData.unlockedLevels == 1)
+        else
         {
-            currentScene = level1Scene;
-            SceneManager.LoadScene(level1Scene);
+
+            SceneManager.LoadScene(DataManagerSingleton.savedData.unlockedLevels);
         }
-        if (DataManagerSingleton.savedData.unlockedLevels == 2)
-        {
-            currentScene = level2Scene;
-            SceneManager.LoadScene(level2Scene);
-        }
-        if (DataManagerSingleton.savedData.unlockedLevels == 3)
-        {
-            currentScene = level3Scene;
-            SceneManager.LoadScene(level3Scene);
-        }
+
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

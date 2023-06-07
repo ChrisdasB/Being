@@ -18,21 +18,33 @@ public class SceneTransitionManager : MonoBehaviour
     {        
         DataManagerSingleton.CloseScene += closeSceneAnim;
         MySceneManager.SceneIsLoaded += openSceneAnim;
+        TutorialManager.TutorialFinished += closeSceneAnim;
+        GameManager.EndStage += closeSceneAnim;
+    }
+
+    private void OnDestroy()
+    {
+        DataManagerSingleton.CloseScene -= closeSceneAnim;
+        MySceneManager.SceneIsLoaded -= openSceneAnim;
+        TutorialManager.TutorialFinished -= closeSceneAnim;
+        GameManager.EndStage -= closeSceneAnim;
     }
 
     private void openSceneAnim()
     {
-        transitionCanvas.SetActive(true);
         transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
-        print("Attempting to close scene!");
+        transitionCanvas.SetActive(true);
+        
+        print("Attempting to open scene!");
         openScene = true;
         transitionGroup.alpha = 1;
     }
 
     private void closeSceneAnim()
     {
-        transitionCanvas.SetActive(true);
         transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
+        transitionCanvas.SetActive(true);
+        
         print("Attempting to close scene!");        
         closeScene = true;
         transitionGroup.alpha = 0;

@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameOverContainer;
     [SerializeField] GameObject winContainer;
     [SerializeField] GameObject pauseContainer;
+    
 
     private void Awake()
     {
@@ -23,9 +24,20 @@ public class UIManager : MonoBehaviour
         GameManager.WinStage += ManageWinState;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.UpdateTries -= UpdateTries;
+        GameManager.PauseStage -= ManagePauseState;
+        GameManager.PlayStage -= ManagePlayState;
+        GameManager.LaunchTurn -= UpdateTries;
+        GameManager.EndStage -= ManageEndState;
+        GameManager.WinStage -= ManageWinState;
+    }
+
     private void Start()
-    {        
+    {
         // Set triesText to initial value
+        DataManagerSingleton.triesCount = 3;
         UpdateTries();
     }
 
@@ -42,6 +54,8 @@ public class UIManager : MonoBehaviour
     {
         pauseContainer.SetActive(true);
     }
+
+   
 
     // Activate GameOver screen
     void ManageEndState()
@@ -60,7 +74,7 @@ public class UIManager : MonoBehaviour
     {
         if(triesCount != null) 
         {
-            triesCount.text = DataManagerSingleton.Instance.triesCount.ToString();
+            triesCount.text = DataManagerSingleton.triesCount.ToString();
         }
         if(!triesCount.enabled)
         {

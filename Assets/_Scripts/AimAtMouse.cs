@@ -14,7 +14,14 @@ public class AimAtMouse : MonoBehaviour
         GameManager.AimTurn += ActivateAim;
         GameManager.PowerTurn += DeactivateAim;
     }
-    
+
+    private void OnDestroy()
+    {
+        // Event Subs
+        GameManager.AimTurn -= ActivateAim;
+        GameManager.PowerTurn -= DeactivateAim;
+    }
+
     void Update()
     {   
         // If Aim is active: Move arrow depending on the mouse position

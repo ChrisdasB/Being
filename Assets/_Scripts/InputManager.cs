@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     public static event Action EscapeClicked;
     public static event Action LeftMouseClicked;
     public static event Action RightMouseClicked;
+    public static event Action DEBUGCLICKED;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -37,6 +38,11 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             EscapeClicked.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            DEBUGCLICKED.Invoke();
         }
 
         // The Camera is for now controller in this script. Maybe a subject to change, if i need more functionality for the camera

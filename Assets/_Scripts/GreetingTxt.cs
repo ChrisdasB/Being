@@ -24,6 +24,11 @@ public class GreetingTxt : MonoBehaviour
         
     }
 
+    private void OnDestroy()
+    {
+        DataManagerSingleton.DataLoaded -= UpdateText;
+    }
+
     private void UpdateText()
     {
         string playerName = DataManagerSingleton.savedData.playerName;

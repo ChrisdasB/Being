@@ -10,8 +10,15 @@ public class DestroyDevObjects : MonoBehaviour
         MySceneManager.SceneIsLoaded += DestroyDevObj;
     }
 
+    private void OnEnable()
+    {
+        GameObject devObj = GameObject.FindGameObjectWithTag("DebugComp");
+        Destroy(devObj);
+    }
+
     private void DestroyDevObj()
     {
+        print("Destroying DevObjects");
         GameObject devObj = GameObject.FindGameObjectWithTag("DebugComp");
         Destroy(devObj);
     }

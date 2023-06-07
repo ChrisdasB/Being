@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject exampleLightPowerUp;
     [SerializeField] GameObject exampleTriesPowerUp;
     [SerializeField] GameObject exampleTarget;
-    [SerializeField] GameObject fullLevelContainer;
+    [SerializeField] float timeBetweenActions = 0.01f;
 
     [SerializeField] List<string> tutorialTxt;
     int indexInList = 0;
@@ -31,7 +31,7 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] float playerLightMaxBrigtness;
     [SerializeField] float playerLightMaxBrigtness2;
-    [SerializeField] float playerLightMultiplier = 2;
+    [SerializeField] float playerLightMultiplier = 20;
     float currentPlayerLightTarget;
 
     [SerializeField] AudioSource audioSource;
@@ -52,11 +52,13 @@ public class TutorialManager : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (increaseLight)
         {
-            currentLightValue += 0.001f;
+            currentLightValue += 0.1f;
+            print(currentLightValue);
+            print(Time.fixedDeltaTime);
             playerLight.pointLightOuterRadius = currentLightValue;
 
             if (playerLight.pointLightOuterRadius >= currentPlayerLightTarget)
@@ -66,13 +68,13 @@ public class TutorialManager : MonoBehaviour
 
                 // Set next void to show text again
                 print("Animation done. Start next function!");                
-                WaitSecondsAndCallNextVoid(2);
+                WaitSecondsAndCallNextVoid(timeBetweenActions);
             }
         }
         if (decreaseLight)
         {
 
-            currentLightValue -= 0.001f;
+            currentLightValue -= 0.1f;
             playerLight.pointLightOuterRadius = currentLightValue;
 
             if (playerLight.pointLightOuterRadius <= currentPlayerLightTarget)
@@ -83,7 +85,7 @@ public class TutorialManager : MonoBehaviour
                 // Set next void to show text again
                 print("Animation done. Start next function!");
                 Destroy(exampleBarrier);
-                WaitSecondsAndCallNextVoid(2);
+                WaitSecondsAndCallNextVoid(timeBetweenActions);
             }
         }
 
@@ -126,14 +128,7 @@ public class TutorialManager : MonoBehaviour
         if (functionIndex == 21) { ShowTutorialTxt(indexInList); }
         if (functionIndex == 22) { ShowTutorialTxt(indexInList); }
         if (functionIndex == 23) { ShowTutorialTxt(indexInList); }
-        if (functionIndex == 24) { ActivateLevel(); }
-        if (functionIndex == 25) { IncreaseLight2(); }
-        if (functionIndex == 26) { TutorialFinished.Invoke(); EmptyOutTxt(); }
-    }
-
-    private void EmptyOutTxt()
-    {
-        tutorialText.text = string.Empty;
+        if (functionIndex == 24) { DataManagerSingleton.savedData.unlockedLevels++ ; TutorialFinished.Invoke(); }        
     }
 
     void WaitSecondsAndCallNextVoid(float seconds)
@@ -151,45 +146,34 @@ public class TutorialManager : MonoBehaviour
             indexInString = 0;
             currentFullString = "";
             // Set next void to StartAnim
-            WaitSecondsAndCallNextVoid(2);
+            WaitSecondsAndCallNextVoid(timeBetweenActions);
         }
         else
         {            
             currentFullString += tutorialTxt[indexInList][indexInString];
             indexInString++;
             UpdateTutorialTxt(currentFullString);            
-            StartCoroutine(PauseThenDoNextChar(0.01f));
+            StartCoroutine(PauseThenDoNextChar(0.0001f));
         }
     }
-
-    
 
     IEnumerator PauseThenDoNextChar(float timeInSeconds)
     {
         yield return new WaitForSeconds(timeInSeconds);
         ShowTutorialTxt(indexInList);
     }
-
     
-
-    private void ActivateLevel()
-    {
-        fullLevelContainer.SetActive(true);
-        functionIndex++;
-        NextFunction();
-    }
-
     private void ActivateTarget()
     {
         exampleTarget.SetActive(true);
-        WaitSecondsAndCallNextVoid(2);
+        WaitSecondsAndCallNextVoid(timeBetweenActions);
     }
 
     private void ActivatePowerUps()
     {
         exampleLightPowerUp.SetActive(true);
         exampleTriesPowerUp.SetActive(true);
-        WaitSecondsAndCallNextVoid(2);
+        WaitSecondsAndCallNextVoid(timeBetweenActions);
     }
 
     private void DecreaseLight()
@@ -201,7 +185,7 @@ public class TutorialManager : MonoBehaviour
     private void BreakExampleLine()
     {
         exampleBarrierController.DestroyBarrier();
-        WaitSecondsAndCallNextVoid(2);
+        WaitSecondsAndCallNextVoid(timeBetweenActions);
     }
 
     private void IncreaseLight1()
@@ -217,8 +201,7 @@ public class TutorialManager : MonoBehaviour
         currentPlayerLightTarget = playerLightMaxBrigtness2;
         increaseLight = true;
     }
-
-    void UpdateTutorialTxt(string txt)
+        void UpdateTutorialTxt(string txt)
     {
         tutorialText.text = txt;  
         if(!audioSource.isPlaying)

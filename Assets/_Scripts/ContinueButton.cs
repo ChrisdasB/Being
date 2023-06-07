@@ -17,6 +17,11 @@ public class ContinueButton : MonoBehaviour
         button.onClick.AddListener(ContinueGame);
     }
 
+    private void OnDestroy()
+    {
+        DataManagerSingleton.DataLoaded -= UpdateContinueButton;
+    }
+
     private void ContinueGame()
     {
         DataManagerSingleton.savedData.unlockedLevels = 1;

@@ -24,6 +24,15 @@ public class ArrowController : MonoBehaviour
         AimDisable();
     }
 
+    private void OnDestroy()
+    {
+        GameManager.AimTurn -= AimActive;
+        GameManager.PowerTurn -= AimInactive;
+        GameManager.LaunchTurn -= AimDisable;
+        GameManager.PauseStage -= AimDisable;
+        GameManager.TutorialStage -= AimDisable;
+    }
+
 
     private void AimDisable()
     {

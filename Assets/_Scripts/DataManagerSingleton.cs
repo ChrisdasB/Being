@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class DataManagerSingleton : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class DataManagerSingleton : MonoBehaviour
     // Create static Instance
     public static DataManagerSingleton Instance;
 
-    public int triesCount;
+    public static int triesCount;
     public AudioClip lightPowerUpAudio;
     public AudioClip triesPowerUpAudio;
 
@@ -27,12 +28,11 @@ public class DataManagerSingleton : MonoBehaviour
 
     private void Awake()
     {
-        
-
         // Event subs
         NewPlayerNameController.NewPlayer += HandleNewPlayer;
         GameManager.WinStage += SaveProgression;
         ContinueButton.OnContinue += ContinueGame;
+    
 
         // If Instance is not set, Instance is this, else destroy
         if (Instance == null)
@@ -50,14 +50,15 @@ public class DataManagerSingleton : MonoBehaviour
 
         // Load the data from file
         savedData = SaveManager.LoadData();
-        Debug.LogError("UnlockedLevels: " + savedData.unlockedLevels);
-        if (DataLoaded != null) { DataLoaded.Invoke(); }
-        print(savedData.playerName);
+        if (DataLoaded != null) { DataLoaded.Invoke(); }        
     }
+
+    
 
     private void SaveProgression()
     {
-        savedData.unlockedLevels = MySceneManager.currentScene;
+        print("Saving Progression!");
+        savedData.unlockedLevels = SceneManager.GetActiveScene().buildIndex + 1;
         SaveManager.SaveData(savedData);
         CloseScene.Invoke();
     }

@@ -22,6 +22,11 @@ public class LaunchController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();        
     }
 
+    private void OnDestroy()
+    {
+        GameManager.LaunchTurn -= Launch;
+    }
+
     // Launch player into direction of the arrow, based on the power-slider value (times a multiplier)
     private void Launch()
     {
