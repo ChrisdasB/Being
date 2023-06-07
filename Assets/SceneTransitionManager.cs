@@ -32,8 +32,10 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void openSceneAnim()
     {
-        transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
+        
         transitionCanvas.SetActive(true);
+        transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
+        
         
         print("Attempting to open scene!");
         openScene = true;
@@ -42,8 +44,8 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void closeSceneAnim()
     {
-        transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
         transitionCanvas.SetActive(true);
+        transitionGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();        
         
         print("Attempting to close scene!");        
         closeScene = true;
@@ -72,6 +74,7 @@ public class SceneTransitionManager : MonoBehaviour
             if (transitionGroup.alpha <= 0)
             {
                 openScene = false;
+                transitionCanvas.SetActive(false);
                 SceneOpened.Invoke();
             }
         }

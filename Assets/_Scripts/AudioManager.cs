@@ -108,23 +108,26 @@ public class AudioManager : MonoBehaviour
     {
         if(blendOutAudio) 
         {
-            HandleMusicAudioChanged(musicAudioSlider.value - 0.1f);
-
-            if(musicAudioSlider.value <= musicAudioSlider.minValue)
+            if (musicAudioSlider.value <= musicAudioSlider.minValue)
             {
                 blendOutAudio = false;
             }
+            HandleMusicAudioChanged(musicAudioSlider.value - 0.1f);
+
+            
         }
 
         if (blendInAudio)
         {
-            HandleMusicAudioChanged(musicAudioSlider.value + 0.3f);
-
             if (musicAudioSlider.value >= DataManagerSingleton.savedData.musicAudioValue)
             {
-                blendOutAudio = false;
+                blendInAudio = false;
                 HandleMusicAudioChanged(DataManagerSingleton.savedData.musicAudioValue);
             }
+
+            HandleMusicAudioChanged(musicAudioSlider.value + 0.3f);
+
+            
         }
     }
 

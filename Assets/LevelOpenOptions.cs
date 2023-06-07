@@ -15,17 +15,18 @@ public class LevelOpenOptions : MonoBehaviour
     void Start()
     {
         button = GetComponent<Button>();
-        OptionsMenuPanel = GameObject.FindGameObjectWithTag("GlobalCanvas");
+        //OptionsMenuPanel = GameObject.FindGameObjectWithTag("GlobalCanvas");
+        //OptionsMenuPanel.SetActive(false);
 
         button.onClick.AddListener(ToggleOptions);
     }
 
     private void ToggleOptions()
     {
-        if(OptionsMenuPanel.activeSelf == false) 
-        {
-            OptionsMenuPanel.SetActiveRecursively(true);
-        }        
+        OptionsMenuPanel = GameObject.FindGameObjectWithTag("GlobalCanvas");
+                
+        OptionsMenuPanel.SetActiveRecursively(true);
+                
     }
 
     // Update is called once per frame

@@ -4,11 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MenuChangeScreen : MonoBehaviour
 {
     [SerializeField] GameObject screenToClose;
     [SerializeField] GameObject screenToOpen;
+
 
     Button button;
     // Start is called before the first frame update
@@ -22,12 +24,6 @@ public class MenuChangeScreen : MonoBehaviour
     public void ChangeScreen()
     {
         screenToOpen.SetActive(true);
-        screenToClose.SetActive(false);
+        screenToClose.SetActive(false);                
     }
-
-    private void Update()
-    {
-        
-    }
-
 }
