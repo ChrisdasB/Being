@@ -7,6 +7,9 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DangerSurfaceController : MonoBehaviour
 {
+    // Controls the 'dangerous' surfaces ingame.
+    // After enabled plays a little warning noise and triggers the EndStage on Player colission (Player is dead)
+
     // Create event
     public static event Action PlayerDied;
 

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ContinueButton : MonoBehaviour
 {
+    // Attached to the continue button in main menu
+    // Triggers event to load last saved scene
+    // Deactivates, if we only have an empty save object
     public static event Action OnContinue;
 
     Button button;

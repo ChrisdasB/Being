@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GlobalMenuController : MonoBehaviour
 {
+    // Constant menu controler for the permanent menu, that gets carried on from the first scene
+    
+
     [SerializeField] GameObject globalCanvas;
     [SerializeField] GameObject mainMenuPanel;
     [SerializeField] GameObject optionsPanel;
@@ -25,16 +28,6 @@ public class GlobalMenuController : MonoBehaviour
         BackToMenu.SetMenuFlag += SetMenuFlag;        
         
         InitMenu();
-    }
-
-    private void DestroyMe()
-    {
-        if(menuFlag)
-        {
-            menuFlag = false;
-            Destroy(this.gameObject);
-        }
-       
     }
 
     private void SetMenuFlag()
@@ -94,11 +87,5 @@ public class GlobalMenuController : MonoBehaviour
             pausePanel.SetActive(false);
             confirmMenuPanel.SetActive(false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

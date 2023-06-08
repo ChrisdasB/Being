@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+    // Class for the save data
+
     public string playerName;
     public int unlockedLevels;
     public float totalAudioValue;

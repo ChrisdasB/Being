@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TriesPowerUpController : MonoBehaviour
 {
+    // On collission with player, trigger event to increase player tries
     // Create Event
     public static event Action IncreaseTries;
 

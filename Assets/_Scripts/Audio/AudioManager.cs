@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
+    // This Manager is a constant component in every scene.
+    // It controls the volume of the music and the SFX through the actual slider in the UI, which guaranties a synch between them.
+
     // Create Event
     public static event Action AudioValuesSet;
 
@@ -27,11 +30,12 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // Event subs
+        // Attach eventlistener to the UI slider
         masterAudioSlider.onValueChanged.AddListener(HandleMasterAudioChanged);
         musicAudioSlider.onValueChanged.AddListener(HandleMusicAudioChanged);
         sfxAudioSlider.onValueChanged.AddListener(HandleSFXAudioChanged);
 
+        // Event subs
         saveAudioBtn.onClick.AddListener(SaveAudioSettings);
         DataManagerSingleton.DataLoaded += SetInitialAudio;
         DataManagerSingleton.CloseScene += ClosingScene;
@@ -43,6 +47,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Unsub events
         DataManagerSingleton.DataLoaded -= SetInitialAudio;
         DataManagerSingleton.CloseScene -= ClosingScene;
         TutorialManager.TutorialFinished -= ClosingScene;
@@ -55,6 +60,7 @@ public class AudioManager : MonoBehaviour
 
     private void SetInitialAudio()
     {
+        // Set the min and max values fot the slider (These are the same value, as the build in audio mixer in unity. Thats, why they are hardcoded)
         masterAudioSlider.minValue = -80;
         masterAudioSlider.maxValue = 0;
         sfxAudioSlider.minValue = -80;
@@ -65,9 +71,11 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        // Initalize all sliders to the loaded values
         HandleMasterAudioChanged(DataManagerSingleton.savedData.totalAudioValue);
         HandleMusicAudioChanged(DataManagerSingleton.savedData.musicAudioValue);
         HandleSFXAudioChanged(DataManagerSingleton.savedData.sfxAudioValue);
+        // If we are not in the tutorial scene, invoke an event
         if(MySceneManager.currentScene != 1)
         {
             AudioValuesSet.Invoke();
@@ -75,41 +83,44 @@ public class AudioManager : MonoBehaviour
         
     }
 
+
+    // Triggered by the save button in the options menu.
     private void SaveAudioSettings()
     {
         DataManagerSingleton.Instance.SaveAudioData(masterAudioSlider.value, musicAudioSlider.value, sfxAudioSlider.value);
     }
 
+
+    // This methods will be fired, everytime someone changes the values of a audio slider. (NO SAVING)
     private void HandleMasterAudioChanged(float newVolume)
     {
         // Set new volume
         masterAudioSlider.value = newVolume;
-        masterAudioMixer.SetFloat(masterParamString, newVolume);
-        print("Attempted to set master audio to: " + newVolume);        
+        masterAudioMixer.SetFloat(masterParamString, newVolume);   
     }
-
     private void HandleMusicAudioChanged(float newVolume)
     {
         musicAudioSlider.value = newVolume;
         masterAudioMixer.SetFloat(musicParamString, newVolume);        
     }
-
     private void HandleSFXAudioChanged(float newVolume)
     {
         sfxAudioSlider.value = newVolume;
         masterAudioMixer.SetFloat(sfxParamString, newVolume);        
     }
 
+
+    // Blending in an out music on scene change
     void ClosingScene()
     {
         blendOutAudio = true;
     }
-
     private void OpeningScene()
     {
         blendInAudio = true;
     }
 
+    // Values get changed 50 times a second.
     private void FixedUpdate()
     {
         if(blendOutAudio) 
@@ -118,9 +129,7 @@ public class AudioManager : MonoBehaviour
             {
                 blendOutAudio = false;
             }
-            HandleMusicAudioChanged(musicAudioSlider.value - 1f);
-
-            
+            HandleMusicAudioChanged(musicAudioSlider.value - 1f);            
         }
 
         if (blendInAudio)
@@ -131,9 +140,7 @@ public class AudioManager : MonoBehaviour
                 HandleMusicAudioChanged(DataManagerSingleton.savedData.musicAudioValue);
             }
 
-            HandleMusicAudioChanged(musicAudioSlider.value + 1f);
-
-            
+            HandleMusicAudioChanged(musicAudioSlider.value + 1f);            
         }
     }
 

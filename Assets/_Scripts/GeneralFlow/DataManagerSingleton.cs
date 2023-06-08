@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class DataManagerSingleton : MonoBehaviour
 {
-    // Create Load Event
+    // This static singleton servers as a holder for vital data, needed in every scene.
+    // Most importantly, it holds the actual savedata of the player
+
+    // Create Events
     public static event Action DataLoaded;
     public static event Action CloseScene;
     public static event Action LevelFinishedAndSaved;
-    // Create Save Event
-    // public static event Action SaveData;
+    
 
     // Create static Instance
     public static DataManagerSingleton Instance;
@@ -55,17 +57,20 @@ public class DataManagerSingleton : MonoBehaviour
         DataLoaded.Invoke(); print("onvking event");       
     }
 
+    // After game is finished, feed the savegame with initial data
     private void ResetSave()
     {
         savedData = new SaveData();
     }
 
+    // After the tutorial, save the first level into savedata (The tutorial-scene works different from the other scenes)
     private void SaveNextLvl()
     {        
         savedData.unlockedLevels = 2;
         SaveManager.SaveData(savedData);
     }
 
+    // Save the current player progression
     private void SaveProgression()
     {
         print("Saving Progression!");
@@ -74,6 +79,7 @@ public class DataManagerSingleton : MonoBehaviour
         CloseScene.Invoke();
     }
 
+    // If a new game is startet, get the savegame ready
     private void HandleNewPlayer()
     {
         SaveData dataToSave = new SaveData(newPlayerName);
@@ -85,10 +91,10 @@ public class DataManagerSingleton : MonoBehaviour
         SaveManager.SaveData(dataToSave);
         savedData = SaveManager.LoadData();
         DataLoaded.Invoke();
-        print("New Player: " + savedData.playerName);
         CloseScene.Invoke();
     }
 
+    // For the continue option in menu, if a valid savegame was found
     private void ContinueGame()
     {
         CloseScene.Invoke();

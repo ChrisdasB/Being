@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CloseGame : MonoBehaviour
 {
+    // Attached to the close button in menu
     Button button;
     // Start is called before the first frame update
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MenuChangeDepending : MonoBehaviour
 {
+    // Opens another UI Paneld, dependign if we are in a menu, or ingame
     Button button;
 
     [SerializeField] GameObject screenOpenInMainMenu;

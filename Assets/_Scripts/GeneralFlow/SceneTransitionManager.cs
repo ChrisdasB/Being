@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class SceneTransitionManager : MonoBehaviour
 {
+    // This script controls the fade in and fade out animations.
+    // I decided to not go with the Unity build-in animator, since this is supposed to be a coding project.
+    // And to be honest, i found this actually easier than the animator in some cases ...
+
     public static event Action SceneClosed;
     public static event Action SceneOpened;
 

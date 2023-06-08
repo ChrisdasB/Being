@@ -6,6 +6,8 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    // Controls the ingame UI (Tries Counter)
+
     [SerializeField] TMP_Text triesCount;
     [SerializeField] GameObject triesCountContainer;  
     

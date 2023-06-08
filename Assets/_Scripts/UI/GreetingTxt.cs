@@ -6,6 +6,7 @@ using TMPro;
 
 public class GreetingTxt : MonoBehaviour
 {
+    // Greetings text that greets the player, if we have a valid savegame
     TMP_Text greetingsText;
     bool firstLoaded = false;
 
@@ -25,8 +26,7 @@ public class GreetingTxt : MonoBehaviour
         if(firstLoaded)
         {
             UpdateText();
-        }
-        
+        }        
     }
 
     private void OnDestroy()

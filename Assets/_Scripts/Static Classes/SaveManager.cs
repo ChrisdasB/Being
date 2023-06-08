@@ -7,6 +7,8 @@ using UnityEngine;
 
 public static class SaveManager
 {
+    // Handles saving and loading data in binary
+
     static string path = Application.persistentDataPath + "/save.data";
 
     public static bool CheckForSaveGame()

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BackToMenu : MonoBehaviour
 {
+    // Attached to the 'Yes' button of the Menu in pause menu
     public static event Action SetMenuFlag;
 
     Button button;

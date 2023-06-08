@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 
 public class NewPlayerNameController : MonoBehaviour
 {
+    // Script attached to the InputField fot the name
     public static event Action NewPlayer;
 
     TMP_InputField inputField;

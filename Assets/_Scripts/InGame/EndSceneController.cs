@@ -7,6 +7,9 @@ using UnityEngine.Rendering.Universal;
 
 public class EndSceneController : MonoBehaviour
 {
+    // This Controller exclusively controls the very last scene.
+    // Lets every char be added after the other, making a nice effect.
+
     public static event Action EndSceneFinished;
 
     [SerializeField] List<string> endSceneTxt;

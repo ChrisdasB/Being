@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class RestartLevel : MonoBehaviour
 {
+    // Script attached to the restart button on the pause menu
+
     public static event Action LevelRestart;
     Button button;
 

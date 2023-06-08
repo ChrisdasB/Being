@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ClosePauseMenu : MonoBehaviour
 {
+    // Attached to the continue button in pause menu
     public static event Action ClosePause;
     Button button;
     // Start is called before the first frame update

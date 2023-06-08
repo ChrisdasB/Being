@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class PlayerContactController : MonoBehaviour
 {
+    // Attached to the ingame barrier, which the player can bounce off from.
+    // Handles the coloring (with a small animation on impact)
+    // Destroys itself after the third player impact and prepares the dangerous barrier
+
     [SerializeField] private List<Color> colors;
     [SerializeField] private float colorLerpTime;
     [SerializeField] private GameObject dangerBarrier;

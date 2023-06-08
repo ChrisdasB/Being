@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class StartGameUIController : MonoBehaviour
 {
+    // Responsible for the intro sequence after the game start.
+    // Simply shows some timed text
+
     CanvasGroup canvasGroup;
     [SerializeField] List<TMP_Text> introTextList;
     [SerializeField] GameObject blurrPanel;

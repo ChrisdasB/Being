@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuChangeScreen : MonoBehaviour
 {
+    // Closes one and opens another UI panel
     [SerializeField] GameObject screenToClose;
     [SerializeField] GameObject screenToOpen;
 

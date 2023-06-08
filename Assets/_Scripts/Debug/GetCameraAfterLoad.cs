@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GetCameraAfterLoad : MonoBehaviour
 {
+    // Make sure, the renderer of the global canvas has the current camer from the current scene
+    // Having no camera, leads to incorrect rendering.
     [SerializeField] Canvas globalCanvas;
     // Start is called before the first frame update
     void Awake()

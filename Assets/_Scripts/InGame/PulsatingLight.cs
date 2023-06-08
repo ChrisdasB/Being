@@ -6,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 
 public class PulsatingLight : MonoBehaviour
 {
+    // Makes light pulsating with time
+
     private float minLightIntesity = 0;
     private float maxLightIntesity = 0.10f;
     private float currentLightIntesity = 0;

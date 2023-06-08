@@ -6,11 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
 {
-    [SerializeField] int MainMenuScene;
-    [SerializeField] int tutorialScene;
-    [SerializeField] int level1Scene;
-    [SerializeField] int level2Scene;
-    [SerializeField] int level3Scene;
+    // Responsible for the loading of the correct scene in every situation
 
     public static event Action SceneIsLoaded;
     public static event Action DestroyOldCanvas;
@@ -19,6 +15,7 @@ public class MySceneManager : MonoBehaviour
     bool menu = false;
     bool wipeSave = false;
 
+    // Lets other classes easily check, which scene is the current scene
     public static int currentScene;
     private void Awake()
     {
@@ -34,6 +31,11 @@ public class MySceneManager : MonoBehaviour
         print("Current Scene index is:" + SceneManager.GetActiveScene().buildIndex);
     }
 
+    private void OnEnable()
+    {
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+    }
+
 
     private void OnDestroy()
     {
@@ -44,6 +46,7 @@ public class MySceneManager : MonoBehaviour
         EndSceneController.EndSceneFinished -= WipeSaveGame;
     }
 
+    // Wipe savegame after game is finished, Quit the application
     private void WipeSaveGame()
     {
         menu = true;
@@ -52,11 +55,7 @@ public class MySceneManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnEnable()
-    {                
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-    }
-
+    // Set flag for reloading the level
     private void SetReloadFlag()
     {
         print("RELOAD FLAG SET!");
@@ -64,6 +63,7 @@ public class MySceneManager : MonoBehaviour
         menu = false;
     }
 
+    // Set flag for loading the menu
     private void SetMenuFlag()
     {
         print("Menu Flag Set!");
@@ -86,16 +86,15 @@ public class MySceneManager : MonoBehaviour
 
     private void LoadLevel()
     {
-        print("Build Index ist: " + SceneManager.GetActiveScene().buildIndex);
-        print("Currently saved level index is: " + DataManagerSingleton.savedData.unlockedLevels);
-
         if(menu) 
         {
+            // The good reader will notice, that i dont load the actual menu (SceneIndex 0), but instead a placeholder menu.
+            // This is due to the fact, that i take the whole Menu from the first scene through the whole game.
+            // This menu is instatiated in the first menu. If i would load this again, i would have 2 menus causing all sorts of problems
             print("Loading the menu!");
             menu = false;            
             SceneManager.LoadScene(9);
-        }
-        
+        }        
         else if(reload) 
         {
             print("Reloading the level!");

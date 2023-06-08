@@ -8,6 +8,9 @@ using UnityEngine.Rendering.Universal;
 
 public class TutorialManager : MonoBehaviour
 {
+    // Exclusive to the tutorial screen
+    // Controlls the whole flow of the scene, along with some animations and showing text
+
     // Create Event
     public static event Action TutorialFinished;
 

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PowerSliderController : MonoBehaviour
 {
+    // Attached to the power-slider, which is attached to the player
+    // Handles the active and inactive stages
+
     [SerializeField] private Slider slider; 
     [SerializeField] Image background;
     [SerializeField] Color activeColor;
@@ -34,11 +37,7 @@ public class PowerSliderController : MonoBehaviour
         GameManager.LaunchTurn -= PowerDisable;
         GameManager.TutorialStage -= PowerDisable;
     }
-
-    private void ResetSliderPosition()
-    {
-        throw new NotImplementedException();
-    }
+    
 
     void FixedUpdate()
     {

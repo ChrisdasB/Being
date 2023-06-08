@@ -5,6 +5,8 @@ using UnityEngine.Rendering.Universal;
 
 public class PerkController : MonoBehaviour
 {
+    // Attached to player, handles the increasing of the light source
+
     [SerializeField] private Light2D playerLight;
     float currentLightValue = 2.5f;
     float nextLightValue = 0;

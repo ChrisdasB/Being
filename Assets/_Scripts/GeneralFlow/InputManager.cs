@@ -5,8 +5,10 @@ using UnityEngine;
 using Cinemachine;
 
 public class InputManager : MonoBehaviour
-{
-    private GameManager gameManager;
+{    
+    // Gets the input from the player in an inGame scene
+    // Inputs possible: Left-Click, Right-Click, Escape, MW-Up, MW-down
+
     [SerializeField] Cinemachine.CinemachineVirtualCamera cmCamera;
     [SerializeField] int maxZoomOut = 13;
     [SerializeField] int minZoomOut = 2;
@@ -18,7 +20,6 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
         ClosePauseMenu.ClosePause += CloseMenu;
     }
 

@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class ContollsUI : MonoBehaviour
+public class ControlsUI : MonoBehaviour
 {
+    // Blends in some controls information in first level
     [SerializeField] List<GameObject> listGO;
     int currentGOindex = -1;
 

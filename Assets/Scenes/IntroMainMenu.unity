@@ -5923,10 +5923,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CS50\n final project"
+  m_text: Being
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 616887744099a194b8dd351b0a61cd8b, type: 2}
-  m_sharedMaterial: {fileID: 295378736120484098, guid: 616887744099a194b8dd351b0a61cd8b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 56020e50aca03b64ba5d23f27b0c426a, type: 2}
+  m_sharedMaterial: {fileID: -5081248799405543423, guid: 56020e50aca03b64ba5d23f27b0c426a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5950,8 +5950,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 78
+  m_fontSizeBase: 78
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8603,7 +8603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1877638886
 RectTransform:
   m_ObjectHideFlags: 0

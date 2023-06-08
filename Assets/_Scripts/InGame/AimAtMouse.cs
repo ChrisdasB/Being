@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AimAtMouse : MonoBehaviour
 {
+    // Every Object with this attached, will starting to look at mouse on the x-axis
     [SerializeField] private GameObject _arrowObject;
     public bool _aimActive = false;
 

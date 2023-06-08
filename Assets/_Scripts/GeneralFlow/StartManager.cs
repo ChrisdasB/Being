@@ -6,9 +6,11 @@ using UnityEngine.Rendering.Universal;
 
 public class StartManager : MonoBehaviour
 {
+    // This script manages the first few seconds in an ingame scene. 
+    // simply preparing the scene for the player with some small animations
+
     [SerializeField] Light2D playerLight;
     [SerializeField] GameObject triesContainer;
-
     [SerializeField] float playerLightMaxBrigtness;
     [SerializeField] float playerLightMultiplier;
     float currentLightValue = 0;

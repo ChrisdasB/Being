@@ -26,6 +26,11 @@ public enum Turn
 
 public class GameManager : MonoBehaviour
 {
+    // This is the very heart of the game
+    // Controlls, in which state the current starts, plays and ends.
+    // the source of multiple Event-Chains
+    // Also controllt the playing stages: Aim, Power, Launch
+
     [SerializeField] GameStage startingStage;
     [SerializeField] Turn startingTurn;
 

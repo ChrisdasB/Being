@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
+    // This script controls the stage if the aiming arrow, attached to the player.
+    // Simply: Disabled, Inactive, Active
+
     [SerializeField] private SpriteRenderer _spriteRendererArrowBody;
     [SerializeField] private SpriteRenderer _spriteRendererArrowHead;
 

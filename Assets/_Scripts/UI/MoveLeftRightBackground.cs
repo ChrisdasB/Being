@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MoveLeftRightBackground : MonoBehaviour
 {
+    // Lets the background in the main menu move left to right
     Vector3 leftPos = new Vector3(-10, 0, 0);
     Vector3 rightPos = new Vector3(10, 0, 0);
     float speed = 0.15f;

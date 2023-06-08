@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class FinishController : MonoBehaviour
 {
+    // Shoudl honestly be named more liek TargetController...
+    // Handles the finishing of a Ingame-Scene
+
     // Create event
     public static event Action TargetHit;
     private CircleCollider2D myCollider;

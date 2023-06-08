@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class LaunchController : MonoBehaviour
 {
+    // Responsible for launching the player on a physics based impulse
+
     // create event
     public static event Action LaunchingDone;
 
