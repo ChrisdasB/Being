@@ -14,14 +14,12 @@ public class UIManager : MonoBehaviour
     {
         //Event Subs
         GameManager.UpdateTries += UpdateTries;
-        GameManager.PlayStage += ManagePlayState;
         GameManager.LaunchTurn += UpdateTries;
     }
 
     private void OnDestroy()
     {
         GameManager.UpdateTries -= UpdateTries;
-        GameManager.PlayStage -= ManagePlayState;
         GameManager.LaunchTurn -= UpdateTries;
     }
 
@@ -30,13 +28,6 @@ public class UIManager : MonoBehaviour
         // Set triesText to initial value
         DataManagerSingleton.triesCount = 3;
         UpdateTries();
-    }
-
-    // Deactivate all UI Elements for Play-Stage
-    private void ManagePlayState()
-    {
-        gameOverContainer.SetActive(false);
-        winContainer.SetActive(false);
     }
 
 

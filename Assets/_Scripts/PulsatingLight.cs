@@ -7,9 +7,9 @@ using UnityEngine.Rendering.Universal;
 public class PulsatingLight : MonoBehaviour
 {
     private float minLightIntesity = 0;
-    private float maxLightIntesity = 0.15f;
+    private float maxLightIntesity = 0.10f;
     private float currentLightIntesity = 0;
-    private float pulsatingSpeed = 0.3f;
+    private float pulsatingSpeed = 0.2f;
     private Light2D myLight;
     private bool lightUp = true;
 

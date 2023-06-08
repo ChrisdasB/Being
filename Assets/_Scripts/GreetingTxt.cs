@@ -15,6 +15,11 @@ public class GreetingTxt : MonoBehaviour
         DataManagerSingleton.DataLoaded += UpdateText;
     }
 
+    private void Start()
+    {
+        UpdateText();
+    }
+
     private void OnEnable()
     {
         if(firstLoaded)

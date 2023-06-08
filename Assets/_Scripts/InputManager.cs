@@ -19,8 +19,19 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
+        ClosePauseMenu.ClosePause += CloseMenu;
     }
-   
+
+    private void OnDestroy()
+    {
+        ClosePauseMenu.ClosePause -= CloseMenu;
+    }
+
+    private void CloseMenu()
+    {
+        EscapeClicked.Invoke();
+    }
+
 
     // Update is called once per frame
     void Update()

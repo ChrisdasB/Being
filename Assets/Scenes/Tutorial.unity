@@ -3845,8 +3845,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 608364188}
     - target: {fileID: 7143701245059410835, guid: 990299ef9ae79be48ab8e4b4363af4f2, type: 3}
+      propertyPath: timeBetweenChars
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7143701245059410835, guid: 990299ef9ae79be48ab8e4b4363af4f2, type: 3}
       propertyPath: fullLevelContainer
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7143701245059410835, guid: 990299ef9ae79be48ab8e4b4363af4f2, type: 3}
+      propertyPath: timeBetweenActions
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7143701245059410835, guid: 990299ef9ae79be48ab8e4b4363af4f2, type: 3}
       propertyPath: exampleLightPowerUp
@@ -3958,6 +3966,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1051656173977730252, guid: e73ceef6a6e0c7145b1c0f0615160c33, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051656173977730252, guid: e73ceef6a6e0c7145b1c0f0615160c33, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 6974033224726997819, guid: 013c91a5e8ebc0d49b43c96cab5bdb8a, type: 2}
     - target: {fileID: 2558483135887335251, guid: e73ceef6a6e0c7145b1c0f0615160c33, type: 3}
       propertyPath: m_RootOrder
       value: 10

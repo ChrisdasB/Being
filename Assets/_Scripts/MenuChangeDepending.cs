@@ -21,7 +21,7 @@ public class MenuChangeDepending : MonoBehaviour
 
     private void ChangeMenuDepending()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 0) 
+        if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 9) 
         {
             screenOpenInMainMenu.SetActive(true);
             screenToClose.SetActive(false);

@@ -17,14 +17,18 @@ public class ContinueButton : MonoBehaviour
         button.onClick.AddListener(ContinueGame);
     }
 
+    private void Start()
+    {
+        UpdateContinueButton();
+    }
+
     private void OnDestroy()
     {
         DataManagerSingleton.DataLoaded -= UpdateContinueButton;
     }
 
     private void ContinueGame()
-    {
-        DataManagerSingleton.savedData.unlockedLevels = 1;
+    {        
         OnContinue.Invoke();
     }
 
@@ -39,6 +43,7 @@ public class ContinueButton : MonoBehaviour
 
     private void UpdateContinueButton()
     {
+        print("PlayerName Loaded: " + DataManagerSingleton.savedData.playerName);
         if(DataManagerSingleton.savedData.playerName != "") 
         {
             button.interactable = true;

@@ -7,14 +7,14 @@ public class FinishController : MonoBehaviour
 {
     // Create event
     public static event Action TargetHit;
-    private EdgeCollider2D myCollider;
+    private CircleCollider2D myCollider;
 
     private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         InputManager.DEBUGCLICKED += DEBUGSKIPLVL;
-        myCollider = GetComponent<EdgeCollider2D>();
+        myCollider = GetComponent<CircleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 

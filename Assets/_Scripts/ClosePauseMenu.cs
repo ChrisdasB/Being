@@ -1,21 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CloseGame : MonoBehaviour
+public class ClosePauseMenu : MonoBehaviour
 {
+    public static event Action ClosePause;
     Button button;
     // Start is called before the first frame update
-
-    private void Awake()
+    void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(HandleCloseGame);
+        button.onClick.AddListener(CloseMenu);
     }
-   private void HandleCloseGame() 
+
+    private void CloseMenu()
     {
-        Application.Quit();
-        print("Quitting Game!");
+        ClosePause.Invoke();
     }
+    
 }

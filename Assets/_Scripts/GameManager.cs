@@ -12,7 +12,8 @@ public enum GameStage
     Start,
     Play,
     End,
-    Win
+    Win,
+    EndScene
 }
 
 // Definition of Play-Stages (Onyl apply, if GameStage is Play)
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     public static event Action PlayStage;
     public static event Action StartStage;
     public static event Action TutorialStage;
+    public static event Action EndSceneStage;
 
     // Play Stages - Only apply when GameStage is Play
     public static event Action AimTurn;
@@ -52,6 +54,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SceneTransitionManager.SceneOpened += StartLevel;
+        RestartLevel.LevelRestart += TriggerLoad;
+        BackToMenu.SetMenuFlag += TriggerLoad;
 
         // GameState Play events
         DangerSurfaceController.PlayerDied += PlayerDied;
@@ -67,10 +71,18 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void OnDestroy()
+    private void TriggerLoad()
     {
+        print("Game Manager is subeed. Time is: " + Time.timeScale);
+        ChangeGameState(GameStage.End);
+    }
+
+    private void OnDestroy()
+    {        
         // Event Subs
         SceneTransitionManager.SceneOpened -= StartLevel;
+        RestartLevel.LevelRestart -= TriggerLoad;
+        BackToMenu.SetMenuFlag -= TriggerLoad;
 
         // GameState Play events
         DangerSurfaceController.PlayerDied -= PlayerDied;
@@ -84,6 +96,7 @@ public class GameManager : MonoBehaviour
         InputManager.RightMouseClicked -= MouseRightClick;
     }
 
+
     private void StartLevel()
     {
         print("Starting the level!");
@@ -95,6 +108,7 @@ public class GameManager : MonoBehaviour
     // Handle click on escape depending on the GameStage (Pause Menu)
     private void EscapeClicked()
     {
+        print("GameStage is: " + _gameStage);
         if(_gameStage == GameStage.Play)
         {
             ChangeGameState(GameStage.Pause);
@@ -183,6 +197,8 @@ public class GameManager : MonoBehaviour
         // GameStage End: Invoke event
         else if(_gameStage == GameStage.End)
         {
+            print("GameStage set to end!");
+            Time.timeScale = 1;
             EndStage.Invoke();
         }
         // GameStage Win: Invoke event
@@ -206,6 +222,11 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
             TutorialStage.Invoke();
+        }
+        else if (_gameStage ==  GameStage.EndScene)
+        {
+            Time.timeScale = 1;
+            EndSceneStage.Invoke();
         }
     }
 

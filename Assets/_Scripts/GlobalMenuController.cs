@@ -12,13 +12,34 @@ public class GlobalMenuController : MonoBehaviour
     [SerializeField] GameObject newGamePanel;
     [SerializeField] GameObject exitPanel;
     [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject confirmMenuPanel;
+
+    bool menuFlag = false;
 
     private void Awake()
     {
         MySceneManager.SceneIsLoaded += InitMenu;
         GameManager.PauseStage += OpenPauseMenu;
         GameManager.PlayStage += ClosePauseMenu;
+        RestartLevel.LevelRestart += ClosePauseMenu;
+        BackToMenu.SetMenuFlag += SetMenuFlag;        
+        
         InitMenu();
+    }
+
+    private void DestroyMe()
+    {
+        if(menuFlag)
+        {
+            menuFlag = false;
+            Destroy(this.gameObject);
+        }
+       
+    }
+
+    private void SetMenuFlag()
+    {
+        menuFlag = true;
     }
 
     private void OnDestroy()
@@ -26,6 +47,7 @@ public class GlobalMenuController : MonoBehaviour
         MySceneManager.SceneIsLoaded -= InitMenu;
         GameManager.PauseStage -= ClosePauseMenu;
         GameManager.PlayStage -= ClosePauseMenu;
+        RestartLevel.LevelRestart -= ClosePauseMenu;
     }
 
     private void ClosePauseMenu()
@@ -36,6 +58,7 @@ public class GlobalMenuController : MonoBehaviour
         exitPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
         globalCanvas.SetActive(false);
+        confirmMenuPanel.SetActive(false);
     }
 
     private void OpenPauseMenu()
@@ -45,26 +68,31 @@ public class GlobalMenuController : MonoBehaviour
             optionsPanel.SetActive(false);
             newGamePanel.SetActive(false);
             exitPanel.SetActive(false);
-            mainMenuPanel.SetActive(false);        
+            mainMenuPanel.SetActive(false);
+            confirmMenuPanel.SetActive(false);
     }
 
     
 
     private void InitMenu()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 0)
+        if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 9)
         {
             optionsPanel.SetActive(false);
             newGamePanel.SetActive(false);
             exitPanel.SetActive(false);
             mainMenuPanel.SetActive(true);
+            pausePanel.SetActive(false);
+            confirmMenuPanel.SetActive(false);
         }
         else 
         {
             mainMenuPanel.SetActive(false);
             optionsPanel.SetActive(false);
             newGamePanel.SetActive(false);
-            exitPanel.SetActive(false); 
+            exitPanel.SetActive(false);
+            pausePanel.SetActive(false);
+            confirmMenuPanel.SetActive(false);
         }
     }
 

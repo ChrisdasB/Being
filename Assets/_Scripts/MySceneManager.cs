@@ -13,36 +13,59 @@ public class MySceneManager : MonoBehaviour
     [SerializeField] int level3Scene;
 
     public static event Action SceneIsLoaded;
+    public static event Action DestroyOldCanvas;
 
     bool reload = false;
+    bool menu = false;
+    bool wipeSave = false;
+
     public static int currentScene;
     private void Awake()
     {
         // Event subs
         SceneTransitionManager.SceneClosed += LoadLevel;
-        GameManager.EndStage += SetReloadFlag;
+        RestartLevel.LevelRestart += SetReloadFlag;
+        BackToMenu.SetMenuFlag += SetMenuFlag;
+        SceneManager.sceneLoaded += SceneLoaded;
 
         // Set first scene to MainMenu
         currentScene = SceneManager.GetActiveScene().buildIndex;
         print("Current Scene index is:" + SceneManager.GetActiveScene().buildIndex);
     }
 
-   
 
     private void OnDestroy()
     {
         SceneTransitionManager.SceneClosed -= LoadLevel;
+        RestartLevel.LevelRestart -= SetReloadFlag;
+        BackToMenu.SetMenuFlag -= SetMenuFlag;
+        SceneManager.sceneLoaded -= SceneLoaded;
+        EndSceneController.EndSceneFinished += SetMenuFlag;
+        EndSceneController.EndSceneFinished += WipeSaveGame;
+    }
+
+    private void WipeSaveGame()
+    {
+        throw new NotImplementedException();
     }
 
     private void OnEnable()
-    {        
-          SceneManager.sceneLoaded += SceneLoaded;
+    {                
         currentScene = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void SetReloadFlag()
     {
+        print("RELOAD FLAG SET!");
         reload = true;
+        menu = false;
+    }
+
+    private void SetMenuFlag()
+    {
+        print("Menu Flag Set!");
+        menu = true;
+        reload = false;
     }
 
     private void SceneLoaded(Scene sceneObj, LoadSceneMode arg1)
@@ -50,27 +73,41 @@ public class MySceneManager : MonoBehaviour
         if(sceneObj.buildIndex != 0)
         {
             SceneIsLoaded.Invoke();
+            if (wipeSave)
+            {
+                SaveManager.SaveData(new SaveData());
+            }
         }
-        print("SceneLoaded");
+        
     }
 
     private void LoadLevel()
-    {        
-        print("Loading Level!");
-        print("Unlocked Levels: " + DataManagerSingleton.savedData.unlockedLevels);
-        if(reload) 
-        { DataManagerSingleton.savedData.unlockedLevels = (SceneManager.GetActiveScene().buildIndex); reload = false; }
-        print("Reloading with inden from saved data: " + DataManagerSingleton.savedData.unlockedLevels);
-        // Load Tutorial
-        if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
+    {
+        print("Build Index ist: " + SceneManager.GetActiveScene().buildIndex);
+        print("Currently saved level index is: " + DataManagerSingleton.savedData.unlockedLevels);
+
+        if(menu) 
         {
-            SceneManager.LoadScene(DataManagerSingleton.savedData.unlockedLevels + 1);
+            print("Loading the menu!");
+            menu = false;            
+            SceneManager.LoadScene(9);
         }
+        
+        else if(reload) 
+        {
+            print("Reloading the level!");
+            reload = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);            
+        }
+        // Load Tutorial
         else
         {
-
+            print("Loading Scene: " + (DataManagerSingleton.savedData.unlockedLevels));
             SceneManager.LoadScene(DataManagerSingleton.savedData.unlockedLevels);
         }
+            
+        
+        
 
 
     }

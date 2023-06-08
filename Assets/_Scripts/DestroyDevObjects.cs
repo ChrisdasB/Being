@@ -18,7 +18,6 @@ public class DestroyDevObjects : MonoBehaviour
 
     private void DestroyDevObj()
     {
-        print("Destroying DevObjects");
         GameObject devObj = GameObject.FindGameObjectWithTag("DebugComp");
         Destroy(devObj);
     }

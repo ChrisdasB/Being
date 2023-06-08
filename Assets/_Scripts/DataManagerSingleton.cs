@@ -32,6 +32,8 @@ public class DataManagerSingleton : MonoBehaviour
         NewPlayerNameController.NewPlayer += HandleNewPlayer;
         GameManager.WinStage += SaveProgression;
         ContinueButton.OnContinue += ContinueGame;
+        TutorialManager.TutorialFinished += SaveNextLvl;
+        EndSceneController.EndSceneFinished += ResetSave;
     
 
         // If Instance is not set, Instance is this, else destroy
@@ -50,10 +52,19 @@ public class DataManagerSingleton : MonoBehaviour
 
         // Load the data from file
         savedData = SaveManager.LoadData();
-        if (DataLoaded != null) { DataLoaded.Invoke(); }        
+        DataLoaded.Invoke(); print("onvking event");       
     }
 
-    
+    private void ResetSave()
+    {
+        savedData = new SaveData();
+    }
+
+    private void SaveNextLvl()
+    {        
+        savedData.unlockedLevels = 2;
+        SaveManager.SaveData(savedData);
+    }
 
     private void SaveProgression()
     {

@@ -35,6 +35,9 @@ public class AudioManager : MonoBehaviour
         saveAudioBtn.onClick.AddListener(SaveAudioSettings);
         DataManagerSingleton.DataLoaded += SetInitialAudio;
         DataManagerSingleton.CloseScene += ClosingScene;
+        GameManager.EndStage += ClosingScene;
+        TutorialManager.TutorialFinished += ClosingScene;
+        EndSceneController.EndSceneFinished += ClosingScene;
         MySceneManager.SceneIsLoaded += OpeningScene;
     }
 
@@ -42,7 +45,10 @@ public class AudioManager : MonoBehaviour
     {
         DataManagerSingleton.DataLoaded -= SetInitialAudio;
         DataManagerSingleton.CloseScene -= ClosingScene;
+        TutorialManager.TutorialFinished -= ClosingScene;
         MySceneManager.SceneIsLoaded -= OpeningScene;
+        EndSceneController.EndSceneFinished -= ClosingScene;
+        GameManager.EndStage -= ClosingScene;
     }
 
 
@@ -104,7 +110,7 @@ public class AudioManager : MonoBehaviour
         blendInAudio = true;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(blendOutAudio) 
         {
@@ -112,7 +118,7 @@ public class AudioManager : MonoBehaviour
             {
                 blendOutAudio = false;
             }
-            HandleMusicAudioChanged(musicAudioSlider.value - 0.1f);
+            HandleMusicAudioChanged(musicAudioSlider.value - 1f);
 
             
         }
@@ -125,7 +131,7 @@ public class AudioManager : MonoBehaviour
                 HandleMusicAudioChanged(DataManagerSingleton.savedData.musicAudioValue);
             }
 
-            HandleMusicAudioChanged(musicAudioSlider.value + 0.3f);
+            HandleMusicAudioChanged(musicAudioSlider.value + 1f);
 
             
         }

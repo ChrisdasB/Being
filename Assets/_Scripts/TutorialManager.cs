@@ -18,7 +18,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject exampleLightPowerUp;
     [SerializeField] GameObject exampleTriesPowerUp;
     [SerializeField] GameObject exampleTarget;
-    [SerializeField] float timeBetweenActions = 0.01f;
+    [SerializeField] float timeBetweenActions = 2f;
+    [SerializeField] float lightIncreaseValue = 0.01f;
+    [SerializeField] float timeBetweenChars = 0.02f;
 
     [SerializeField] List<string> tutorialTxt;
     int indexInList = 0;
@@ -56,7 +58,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (increaseLight)
         {
-            currentLightValue += 0.1f;
+            currentLightValue += lightIncreaseValue;
             print(currentLightValue);
             print(Time.fixedDeltaTime);
             playerLight.pointLightOuterRadius = currentLightValue;
@@ -74,7 +76,7 @@ public class TutorialManager : MonoBehaviour
         if (decreaseLight)
         {
 
-            currentLightValue -= 0.1f;
+            currentLightValue -= lightIncreaseValue;
             playerLight.pointLightOuterRadius = currentLightValue;
 
             if (playerLight.pointLightOuterRadius <= currentPlayerLightTarget)
@@ -141,7 +143,6 @@ public class TutorialManager : MonoBehaviour
     {        
         if(indexInString >= tutorialTxt[indexInList].Length) 
         {
-            
             indexInList++;
             indexInString = 0;
             currentFullString = "";
@@ -153,7 +154,7 @@ public class TutorialManager : MonoBehaviour
             currentFullString += tutorialTxt[indexInList][indexInString];
             indexInString++;
             UpdateTutorialTxt(currentFullString);            
-            StartCoroutine(PauseThenDoNextChar(0.0001f));
+            StartCoroutine(PauseThenDoNextChar(timeBetweenChars));
         }
     }
 

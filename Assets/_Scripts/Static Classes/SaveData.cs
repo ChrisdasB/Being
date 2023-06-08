@@ -15,7 +15,7 @@ public class SaveData
     public SaveData()
     {
         playerName = "";
-        unlockedLevels = 0;
+        unlockedLevels = 1;
         totalAudioValue = 1;
         musicAudioValue = 1;
         sfxAudioValue = 1;
@@ -25,7 +25,7 @@ public class SaveData
     public SaveData(string newPlayerName)
     {
         playerName = newPlayerName;
-        unlockedLevels = 0;
+        unlockedLevels = 1;
         totalAudioValue = 1;
         musicAudioValue = 1;
         sfxAudioValue = 1;
