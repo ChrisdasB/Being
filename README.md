@@ -8,6 +8,11 @@
 For my CS50 final project, i decided to make a small game in Unity. I had some prior experience, but i really struggled on more advanced data types like arrays or lists.
 Also a game has to run in realtime, so every operation has to happen within one frame. The biggest challenge, is to react depending on the userinteraction.
 
+#### Where is everything?
+The main folder of interest will be Assets/_Scripts/
+
+There you will find the actual code.
+
 I learned:
 C# Events,
 The principle of a statemachine,
