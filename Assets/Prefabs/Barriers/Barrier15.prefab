@@ -189,10 +189,8 @@ MonoBehaviour:
   audioClipsColission:
   - {fileID: 8300000, guid: dbc3ffa8be014e240804aad7f2c08451, type: 3}
   - {fileID: 8300000, guid: 160b34bd5e44b7c4b8bfe9903d6ca8f6, type: 3}
-  - {fileID: 8300000, guid: 1a14941737bd560478177992cec9fc01, type: 3}
   - {fileID: 8300000, guid: c4bdcb24157ec274e86d09a8a409271f, type: 3}
   - {fileID: 8300000, guid: cbe2860d6ccac5642891c8aa39ad319b, type: 3}
-  - {fileID: 8300000, guid: 40c2fe993cdaf8d438a1504eb8fe9de3, type: 3}
   - {fileID: 8300000, guid: 668face517de8794e9370063361896de, type: 3}
   - {fileID: 8300000, guid: a6be6b8140ed5034b82027943a0560ac, type: 3}
 --- !u!1 &4765252030006263791

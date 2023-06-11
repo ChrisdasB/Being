@@ -49,12 +49,10 @@ public class DataManagerSingleton : MonoBehaviour
         {
             // Do the first save with the default values from constructor
             SaveManager.SaveData(new SaveData());
-            print("Default values saved!");
         }
 
         // Load the data from file
-        savedData = SaveManager.LoadData();
-        DataLoaded.Invoke(); print("onvking event");       
+        savedData = SaveManager.LoadData();    
     }
 
     // After game is finished, feed the savegame with initial data
@@ -73,7 +71,6 @@ public class DataManagerSingleton : MonoBehaviour
     // Save the current player progression
     private void SaveProgression()
     {
-        print("Saving Progression!");
         savedData.unlockedLevels = SceneManager.GetActiveScene().buildIndex + 1;
         SaveManager.SaveData(savedData);
         CloseScene.Invoke();
@@ -83,6 +80,7 @@ public class DataManagerSingleton : MonoBehaviour
     private void HandleNewPlayer()
     {
         SaveData dataToSave = new SaveData(newPlayerName);
+
         // Take the currently set audio settings into new player savegame
         dataToSave.totalAudioValue = savedData.totalAudioValue;
         dataToSave.musicAudioValue = savedData.musicAudioValue;

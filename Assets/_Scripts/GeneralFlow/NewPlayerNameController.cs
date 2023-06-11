@@ -19,7 +19,7 @@ public class NewPlayerNameController : MonoBehaviour
 
     public void NewPlayerName()
     {
-        print(inputField.text);
+        print("Input field function called.");
         if(inputField.text != "")
         {
             DataManagerSingleton.newPlayerName = inputField.text;

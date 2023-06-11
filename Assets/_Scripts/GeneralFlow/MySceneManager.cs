@@ -28,7 +28,6 @@ public class MySceneManager : MonoBehaviour
 
         // Set first scene to MainMenu
         currentScene = SceneManager.GetActiveScene().buildIndex;
-        print("Current Scene index is:" + SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnEnable()
@@ -107,11 +106,6 @@ public class MySceneManager : MonoBehaviour
             print("Loading Scene: " + (DataManagerSingleton.savedData.unlockedLevels));
             SceneManager.LoadScene(DataManagerSingleton.savedData.unlockedLevels);
         }
-            
-        
-        
-
-
     }
 
     

@@ -884,7 +884,7 @@ MonoBehaviour:
   endSceneText: {fileID: 1657346539}
   playerLight: {fileID: 488050530}
   audioSource: {fileID: 1467189799}
-  txtSound: {fileID: 8300000, guid: 0606436af84fd604bbf15f49e433dfe0, type: 3}
+  txtSound: {fileID: 8300000, guid: 5717679b45a5fb4469e71f38364a9d83, type: 3}
   WaitAndTrigger: 0
 --- !u!1001 &130172937
 PrefabInstance:
@@ -1585,11 +1585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d442b171e67480c44a075796dfc90f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuScene: 0
-  tutorialScene: 1
-  level1Scene: 2
-  level2Scene: 3
-  level3Scene: 4
 --- !u!114 &267074673
 MonoBehaviour:
   m_ObjectHideFlags: 0

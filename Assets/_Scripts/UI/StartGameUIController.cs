@@ -55,11 +55,9 @@ public class StartGameUIController : MonoBehaviour
             
             if(currentText.alpha >= 1)
             {
-                print("Showing text is done");
                 showCurrentText = false;
                 currentText.alpha = 1;
                 textIndex++;
-                print("Next function is" + functionIndex);
                 WaitSecondsAndCallNextVoid(0.2f);
             }
         }
@@ -128,7 +126,6 @@ public class StartGameUIController : MonoBehaviour
 
     void WaitSecondsAndCallNextVoid(float seconds)
     {
-        print("Waiting for " + seconds + " seconds. Current function is: " + functionIndex);
         pauseSeconds = seconds;
         functionIndex++;
         WaitAndTrigger = true;

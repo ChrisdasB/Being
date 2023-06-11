@@ -46,7 +46,6 @@ public class ContinueButton : MonoBehaviour
 
     private void UpdateContinueButton()
     {
-        print("PlayerName Loaded: " + DataManagerSingleton.savedData.playerName);
         if(DataManagerSingleton.savedData.playerName != "") 
         {
             button.interactable = true;

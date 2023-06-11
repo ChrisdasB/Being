@@ -11,6 +11,7 @@ public static class SaveManager
 
     static string path = Application.persistentDataPath + "/save.data";
 
+    // Check, if we have a savegame, if not, create a blank one
     public static bool CheckForSaveGame()
     {        
         if (!File.Exists(path))
@@ -27,6 +28,7 @@ public static class SaveManager
         }    
     }
 
+    // Save given data
     public static void SaveData(SaveData newSaveData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -36,6 +38,7 @@ public static class SaveManager
         stream.Close();
     }
 
+    // Load data
     public static SaveData LoadData()
     {
         if(File.Exists(path)) 

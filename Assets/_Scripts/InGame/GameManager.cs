@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     private Turn _turn;
 
     // Game Stages
-    // ToDo: Implement Start and Tutorial events
     public static event Action EndStage;
     public static event Action PauseStage;
     public static event Action WinStage;
@@ -201,8 +200,7 @@ public class GameManager : MonoBehaviour
         }
         // GameStage End: Invoke event
         else if(_gameStage == GameStage.End)
-        {
-            print("GameStage set to end!");
+        {            
             Time.timeScale = 1;
             EndStage.Invoke();
         }
